@@ -1,0 +1,19 @@
+.siteNavBar {
+  background: black;
+  padding: 1% 2%;
+  display: flex;
+  gap: 1%;
+  justify-content: center;
+}
+
+.siteNavBar>* {
+  color: white;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 700;
+  font-size: larger;
+  text-decoration: none;
+}
+
+.siteNavBar>*:hover {
+  color: red;
+}
