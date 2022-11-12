@@ -3,7 +3,7 @@ import { auth, provider } from "../../firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-function Login({ isAuth, setIsAuth }) {
+function Profile({ isAuth, setIsAuth }) {
   let navigate = useNavigate();
 
   function signInWithGoogle() {
@@ -39,4 +39,4 @@ function Login({ isAuth, setIsAuth }) {
   );
 };
 
-export default Login;
+export default Profile;
