@@ -1,44 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
 import { useNavigate } from 'react-router-dom';
 
 
-function CreateEssay() {
-  const [essay, setEssay] = useState({
-                                      title: "",
-                                      body: "",
-                                      author: {
-                                        id: "",
-                                        name: ""
-                                      }
-                                     });
+function CreateEssay({ user }) {
+  const [essay, setEssay] = useState({title: "", body: "",});
 
   let navigate = useNavigate();
   const essaysCollectionRef = collection(db, "essays");
 
   function handleChange(event) {
-    setEssay(prevState => (
-      {...prevState, [event.target.name]: event.target.value}
+    setEssay(current => (
+      {...current, [event.target.name]: event.target.value}
     ));
   };
 
   function handleEssaySubmission(event) {
     event.preventDefault();
-    setEssay(prevState => (
-      {...prevState,
-        author: {
-          id: auth.currentUser.uid,
-          name: auth.currentUser.displayName
-        }}
-    ));
     createEssay();
+    setEssay({ title: "", body: "" })
     navigate("/");
   };
 
 
   async function createEssay() {
-    await addDoc(essaysCollectionRef, essay);
+    await addDoc(essaysCollectionRef, {
+      title: essay.title,
+      body: essay.body,
+      author: { id: user.uid, name: user.displayName }
+    });
   };
 
   return (
