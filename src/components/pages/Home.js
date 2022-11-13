@@ -4,17 +4,19 @@ import { db } from "../../firebase-config";
 
 function Home() {
   const [essays, setEssays] = useState([]);
-  const essaysCollectionRef = collection(db, "essays");
 
   useEffect(() => {
+    async function fetchEssays() {
+      const essaysCollectionRef = collection(db, "essays");
+      const data = await getDocs(essaysCollectionRef);
+
+      setEssays(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
     fetchEssays();
   }, []);
 
-  async function fetchEssays() {
-    const data = await getDocs(essaysCollectionRef);
-    setEssays(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    console.log(essays);
-  };
+
 
   async function deleteEssay(id) {
     const essayDoc = doc(db, "essays", id);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
@@ -7,7 +7,7 @@ import CreateEssay from './components/pages/CreateEssay';
 import Profile from './components/pages/Profile';
 import Logout from './components/pages/Logout';
 import { auth } from "./firebase-config";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import ProtectedRoute from './ProtectedRoute';
 
 import "./styles.css"
